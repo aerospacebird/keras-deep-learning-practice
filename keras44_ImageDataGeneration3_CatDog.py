@@ -4,18 +4,31 @@ from tensorflow.keras.preprocessing.image import ImageDataGenerator
 print(np.__version__)
 
 train_datagen = ImageDataGenerator(
-    rescale=1./255,   #. 부동소숫점 형변환
-    horizontal_flip=True,  #이미지를 좌우 반전합니다.
-    vertical_flip=True,    #이미지를 상하 반전합니다.
-    width_shift_range=0.1,
-    height_shift_range=0.1,
-    rotation_range=5,
-    zoom_range=1.2,
-    shear_range=0.7, # 전단 변환(Shear Transformation)**을 적용하는 옵션
-    fill_mode='nearest'
+
+    rescale=1./255,          # 픽셀값을 0~255 → 0~1로 정규화
+
+    horizontal_flip=True,    # 이미지를 좌우로 반전
+
+    vertical_flip=True,      # 이미지를 상하로 반전
+
+    width_shift_range=0.1,   # 이미지 너비의 10% 범위에서 좌우 이동
+
+    height_shift_range=0.1,  # 이미지 높이의 10% 범위에서 상하 이동
+
+    rotation_range=5,        # -5° ~ +5° 범위에서 회전
+
+    zoom_range=1.2,          # 이미지를 확대/축소하여 데이터 증강
+
+    shear_range=0.7,         # 이미지를 기울이는 전단 변환 적용
+
+    fill_mode='nearest'      # 변환 후 빈 공간을 가장 가까운 픽셀로 채움
 )
+
+
 test_datagen = ImageDataGenerator(
-    rescale=1./255,
+
+    rescale=1./255           # 테스트 이미지의 픽셀값을 0~1로 정규화
+
 )
 
 path_train = './_data/image/cat_dog/training_set/'   #  Found 8005 images belonging to 2 classes.

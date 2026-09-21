@@ -53,8 +53,8 @@ xy_test = test_datagen.flow_from_directory(
 )
 
 
-print(xy_train[0][0])   #첫번째 배치의 x데이터가됨
-print(xy_train[0][1])   #첫번째 배치의 y데이터가됨
+print(xy_train[0][0])   #첫번째 배치의 x데이터가됨, 그 배치의 이미지(X),
+print(xy_train[0][1])   #첫번째 배치의 y데이터가됨, 그 배치의 정답(y) 입니다.
 
 
 x_train = xy_train[0][0]
@@ -64,6 +64,9 @@ y_test = xy_test[0][1]
 
 print(x_train.shape, y_train.shape)
 print(x_test.shape, y_test.shape)
+
+# path_train = './_data/image/brain/train/'
+# path_test = './_data/image/brain/test/'
 
 np_path = './_data/kaggle_cat_dog_npy/'             #
 np.save(np_path + 'keras45_01_x_train.npy' , arr = xy_train[0][0])  # arr = x_train 도가능 
