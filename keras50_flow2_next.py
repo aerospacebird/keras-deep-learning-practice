@@ -3,40 +3,45 @@ from tensorflow.keras.preprocessing.image import img_to_array
 import numpy as np
 import matplotlib.pyplot as plt
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras.datasets import fashion_mnist
 
 
-path = 'c:/study/_data/image/'
 
-img = load_img(path + 'my_photo.png', target_size=(150,150))
-#<PIL.Image.Image image mode=RGB size=150x150 at 0x2289A4019C0>
-print(type(img))#<class 'PIL.Image.Image'>
+(x_train, y_train), (x_test, y_test) = fashion_mnist.load_data()
 
-# plt.imsfrom tensorflow.keras.preprocessing.image import load_img 
-from tensorflow.keras.preprocessing.image import img_to_array
-from tensorflow.keras.preprocessing.image import ImageDataGenerator
-import numpy as np
-import matplotlib.pyplot as plt
 
-path = 'c:/study/_data/image/'
+# path = 'c:/study/_data/image/'
 
-img = load_img(path + 'my_photo.png', target_size=(150,150))
-#<PIL.Image.Image image mode=RGB size=150x150 at 0x2289A4019C0>
-print(type(img))#<class 'PIL.Image.Image'>
+# img = load_img(path + 'my_photo.png', target_size=(150,150))
+# #<PIL.Image.Image image mode=RGB size=150x150 at 0x2289A4019C0>
+# print(type(img))#<class 'PIL.Image.Image'>
 
-# plt.imshow(img)
-# plt.show()
+# # plt.imsfrom tensorflow.keras.preprocessing.image import load_img 
+# from tensorflow.keras.preprocessing.image import img_to_array
+# from tensorflow.keras.preprocessing.image import ImageDataGenerator
+# import numpy as np
+# import matplotlib.pyplot as plt
 
-arr = img_to_array(img)
-print(arr)
-print(arr.shape)    #(150, 150, 3)
-print(type(arr))    #<class 'numpy.ndarray'>
+# path = 'c:/study/_data/image/'
 
-arr = np.expand_dims(arr, axis=0) #차원 증가 
+# img = load_img(path + 'my_photo.png', target_size=(150,150))
+# #<PIL.Image.Image image mode=RGB size=150x150 at 0x2289A4019C0>
+# print(type(img))#<class 'PIL.Image.Image'>
+
+# # plt.imshow(img)
+# # plt.show()
+
+# arr = img_to_array(img)
 # print(arr)
-print(arr.shape)    #(1, 150, 150, 3)
+# print(arr.shape)    #(150, 150, 3)
+# print(type(arr))    #<class 'numpy.ndarray'>
 
-# np_path = './_data/kaggle_cat_dog_npy/'
-# np.save(np_path + "keras48_me.npy", arr=arr)
+# arr = np.expand_dims(arr, axis=0) #차원 증가 
+# # print(arr)
+# print(arr.shape)    #(1, 150, 150, 3)
+
+# # np_path = './_data/kaggle_cat_dog_npy/'
+# # np.save(np_path + "keras48_me.npy", arr=arr)
 
 ################# 요기부터 증폭이닷 ####################
 datagen = ImageDataGenerator(
@@ -50,6 +55,48 @@ datagen = ImageDataGenerator(
     shear_range= 0.7,           #좌표하나를 고정하고 다른 몇개의 좌표를 이동 (한마디로 찌부)
     fill_mode='nearest'         
 )
+
+augment_size = 100
+
+print(x_train.shape) #(60000, 28, 28)
+print(x_train[0].shape)# (28, 28)
+
+aaa = np.tile(x_train[0], augment_size).reshape(-1, 28, 28, 1) # 복사하여 붙이기
+#exit()
+print(aaa.shape) #(28, 28), (28, 2800)------------reshape 하면 요렇게 된다.------------->>>>>>>>>>>>>> (100, 28, 28, 1)
+
+xy_data = datagen.flow(
+      np.tile(x_train[0].reshape(28*28), augment_size).reshape(-1,28,28,1),  # x       28*28 = 784
+      np.zeros(augment_size), # y
+      batch_size= augment_size,
+      shuffle=False,
+
+).next()
+
+print(xy_data)
+print(type(xy_data))
+
+#print(xy_data.shape)
+print(len(xy_data)) # x, y 두개니까
+
+print(xy_data[0].shape) #(100, 28, 28, 1)
+print(xy_data[1].shape) # (100,)
+
+
+plt.figure(figsize=(7,7))
+for i in range(49):
+      plt.subplot(7,7,i+1)
+      plt.imshow(xy_data[0][i], cmap='gray')
+plt.show()
+
+
+      
+exit()
+
+
+
+
+
 
 
 it = datagen.flow(arr, 
