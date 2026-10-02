@@ -32,7 +32,7 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 padded_x = pad_sequences(x, 
                          padding='pre',  #'post'
                          maxlen = 5,
-                         truncating='post'
+                         truncating='post' #truncating='post'는 maxlen보다 긴 시퀀스를 잘라낼 때, 뒤쪽(끝부분)을 잘라낸다는 의미입니다.
                          ) #'post'
 
 print(padded_x)

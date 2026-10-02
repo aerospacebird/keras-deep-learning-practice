@@ -17,7 +17,7 @@ docs = ['너무 재미있다', '참 최고예요', '참 잘만든 영화에요',
         '개똥이 바보', '말똥이 잘생겼다', '길동이 또 구라친다',
         ]
 
-labels = np.array([1,1,1,1,1,0,0,0,0,0,0,1,0,1,0])  # y
+labels = np.array([1,1,1,1,1,0,0,0,0,0,0,1,0,1,0])  # y 즉, 긍정일때 1, 부정일때 0.
 
 token = Tokenizer()
 token.fit_on_texts(docs)
@@ -32,7 +32,7 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 padded_x = pad_sequences(x, 
                          padding='pre',  #'post'
                          maxlen = 5,
-                         truncating='post'
+                         truncating='post' # maxlen보다 긴 시퀀스를 잘라낼 때, 뒤쪽(끝부분)을 잘라낸다는 의미입니다. cf) "pre"
                          ) #'post'
 
 print(padded_x)
@@ -59,12 +59,12 @@ y = labels
 # (15, 5)
 ######################################### 데이터 분리 ###################################
 
-x_train, x_test, y_train, y_test = train_test_split(
-                                                   x, y,train_size= 0.75,
-                                                   random_state=43,
-)
+# x_train, x_test, y_train, y_test = train_test_split(
+#                                                    x, y,train_size= 0.75,
+#                                                    random_state=43,
+# )
 
-print(x.shape, y.shape) # (15, 5) (15,)
+# print(x.shape, y.shape) # (15, 5) (15,)
 #exit()
 #2.  DNN MODEL 구성하시오?
 
@@ -314,3 +314,33 @@ else:
 # [[0]]
 
 # [부정] 개똥이 잘생겼다.
+##############################################################################################
+# ==============================
+# Test Loss     : 0.6222547292709351
+# Test Accuracy : 0.5
+# ==============================
+# 1/1 [==============================] - 0s 89ms/step
+
+# y_test:
+# [0 1 1 0]
+
+# y_pred:
+# [[0]
+#  [0]
+#  [0]
+#  [0]]
+
+# 새로운 문장 Sequence:
+# [[24, 27]]
+
+# 새로운 문장 Padding:
+# [[ 0  0  0 24 27]]
+# 1/1 [==============================] - 0s 14ms/step
+
+# 예측 확률:
+# [[0.19062836]]
+
+# 예측 결과:
+# [[0]]
+
+# [부정] 개똥이 잘생겼다

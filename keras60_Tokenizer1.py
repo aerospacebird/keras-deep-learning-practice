@@ -1,4 +1,5 @@
 import numpy as np
+
 from tensorflow.keras.preprocessing.text import Tokenizer
 import numpy as np
 import pandas as pd
@@ -6,6 +7,7 @@ import pandas as pd
 from sklearn.datasets import load_iris
 from sklearn.preprocessing import OneHotEncoder
 from tensorflow.keras.utils import to_categorical
+
 text = " 나는 지금 진짜 진짜 매우 매우 맛있는 김밥을 엄청 마구 마구 마구 마구 먹었다."
 
 token = Tokenizer() # 객체(인스턴스) = class(), 인스턴스 생성.
@@ -22,7 +24,7 @@ print(x)
 [[4, 5, 2, 2, 3, 3, 6, 7, 8, 1, 1, 1, 1, 9]] # one hot encoding 3가지 방법
 print(len(x))  # 1
 
-
+exit()
 # # ============================================================
 # # #3. Integer Encoding → One-Hot Encoding
 # # ============================================================
@@ -189,7 +191,7 @@ ohe = OneHotEncoder(
 )
 
 arr_ohe = ohe.fit_transform(x_2d)
-x_2d :
+x_2d 
 # [[4]
 #  [5]
 #  [2]
