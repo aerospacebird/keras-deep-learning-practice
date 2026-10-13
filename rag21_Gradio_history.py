@@ -101,7 +101,7 @@ rag_chain = create_retrieval_chain(
 def answer_invoke(message, history):
     chat_history = []
 
-    for item in history:
+    for item in history[-10:]: #최근 10개 까지만 시현
         content = item["content"]
 
         if item["role"] == "user":

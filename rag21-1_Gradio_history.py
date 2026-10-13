@@ -20,6 +20,7 @@ base_url = "https://monogpt.kr/api/monorouter/v1"
 
 # 01. Embedding
 from langchain_huggingface.embeddings import HuggingFaceEmbeddings
+
 embeddings = HuggingFaceEmbeddings(
     model_name = "Qwen/Qwen3-Embedding-0.6B",
     model_kwargs={
@@ -124,13 +125,6 @@ general_chain = general_prompt | model | StrOutputParser()
 
 
 #############################################################################################################
-
-
-
-
-
-
-
 
 
 # ============================================================
