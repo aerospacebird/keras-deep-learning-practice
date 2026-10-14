@@ -202,8 +202,8 @@ from langchain_classic.chains import create_retrieval_chain
 
 # """) 
 
-prompt = ChatPromptTemplate.from_messages("""
-    ("system", """
+prompt = ChatPromptTemplate.from_messages(["""
+    ("system", 
     당신은 강력한 ai 챗봇입니다
     다음 규칙에 따라 답변하세요
     1. 이전대화에서 확인 할수 있는 정보는 이전 대화를 참고하여 답변하세요
@@ -217,7 +217,7 @@ prompt = ChatPromptTemplate.from_messages("""
 
     컨텍스트:{context}
 
-    """)
+""" ),
     MessagesPlaceholder(varible_name='chat_history'),
     ("human", "{input}")
 ])
