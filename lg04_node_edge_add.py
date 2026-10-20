@@ -26,6 +26,9 @@ from langchain_core.messages import AIMessage, HumanMessage
 class State(TypedDict):
     messages : Annotated[list, add_messages]  # messages 필드에 add_messages 데코레이터 적용
     aaa : str
+    bbb : str
+    ccc : str
+
 
 # 위에꺼는 한마디로 아래다!
 state = {
